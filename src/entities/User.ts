@@ -22,7 +22,7 @@ class User {
 
     @Column()
     image: string
-    
+
     constructor() {
         if (!this.id) {
             this.id = uuid()

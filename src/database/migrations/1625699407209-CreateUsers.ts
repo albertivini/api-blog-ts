@@ -38,11 +38,6 @@ export class CreateUsers1625699407209 implements MigrationInterface {
                         type: "varchar",
                         isNullable: true
                     },
-                    {
-                        name: "tagList",
-                        type: "varchar",
-                        isNullable: true
-                    },
                 ]
             })
         )

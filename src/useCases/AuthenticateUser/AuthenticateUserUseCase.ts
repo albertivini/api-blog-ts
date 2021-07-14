@@ -1,8 +1,8 @@
 import { getCustomRepository } from "typeorm"
 import { UserRepositories } from "../../repositories/UserRepositories"
 import { compare } from "bcryptjs"
-import { ValidateLoginProvider } from "../../providers/ValidateLoginProvider"
 import { GenerateTokenProvider } from "../../providers/GenerateTokenProvider"
+import validator from "validator"
 
 interface IAuthenticateUser {
     email: string
@@ -13,11 +13,7 @@ export class AuthenticateUserUseCase {
 
     async execute({ email, password }: IAuthenticateUser) {
 
-        const validateLoginProvider = new ValidateLoginProvider()
-        
-        const validate = validateLoginProvider.execute({ email, password })
-
-        if (!validate) {
+        if (!(validator.isEmail(email) && !(validator.isEmpty(password)))) {
             throw new Error("Dados inseridos estão inválidos")
         }
 
