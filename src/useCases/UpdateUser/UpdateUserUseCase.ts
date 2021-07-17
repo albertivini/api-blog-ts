@@ -1,5 +1,6 @@
 import { getCustomRepository } from "typeorm"
 import { UserRepositories } from "../../repositories/UserRepositories"
+import { hash } from "bcryptjs"
 import validator from "validator"
 
 interface IUpdateUser {
@@ -22,12 +23,14 @@ export class UpdateUserUseCase {
 
         const userRepositories = getCustomRepository(UserRepositories)
 
+        const HashPassword = await hash(password, 10)
+
         await userRepositories.update({
             id
         }, {
             username, 
             email, 
-            password,
+            password: HashPassword,
             bio,
             image,
         })

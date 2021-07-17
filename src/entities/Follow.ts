@@ -9,13 +9,13 @@ class Follow {
     @PrimaryColumn()
     id: string
 
-    @JoinColumn({ name: "id_segue"})
+    @JoinColumn({name: "id_segue"})
     @ManyToOne(() => User)
-    idSegue: User;
+    id_segue: User
 
+    @JoinColumn({name: "id_seguido"})
     @ManyToOne(() => User)
-    @JoinColumn({ name: "id_seguido"})
-    idSeguido: User
+    id_seguido: User
 
     constructor() {
 
