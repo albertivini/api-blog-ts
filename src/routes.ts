@@ -8,6 +8,7 @@ import { ShowUserController } from './useCases/ShowUser/ShowUserController'
 import { FollowUserController } from './useCases/FollowUser/FollowUserController'
 import { UnfollowUserController } from './useCases/UnfollowUser/UnfollowUserController'
 import { ShowProfileController } from './useCases/ShowProfile/ShowProfileController'
+import { CreateArticleController } from './useCases/CreateArticle/CreateArticleController'
 
 const router = Router()
 
@@ -18,6 +19,7 @@ const showUserController = new ShowUserController()
 const followUserController = new FollowUserController()
 const unfollowUserController = new UnfollowUserController()
 const showProfileController = new ShowProfileController()
+const createArticleController = new CreateArticleController()
 
 
 router.post('/api/users', createUserController.handle)
@@ -27,5 +29,6 @@ router.get('/api/user', ensureAuthenticated, showUserController.handle)
 router.post('/api/profiles/:username/follow', ensureAuthenticated, followUserController.handle)
 router.delete('/api/profiles/:username/unfollow', ensureAuthenticated, unfollowUserController.handle)
 router.get('/api/profiles/:username', ensureAuthenticated, showProfileController.handle)
+router.post('/api/articles', ensureAuthenticated, createArticleController.handle)
 
 export { router }
