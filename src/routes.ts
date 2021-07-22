@@ -11,6 +11,7 @@ import { ShowProfileController } from './useCases/ShowProfile/ShowProfileControl
 import { CreateArticleController } from './useCases/CreateArticle/CreateArticleController'
 import { UpdateArticleController } from './useCases/UpdateArticle/UpdateArticleController'
 import { DeleteArticleController } from './useCases/DeleteArticle/DeleteArticleController'
+import { ShowArticleBySlugController } from './useCases/ShowArticleBySlug/ShowArticleBySlugController'
 
 const router = Router()
 
@@ -24,6 +25,7 @@ const showProfileController = new ShowProfileController()
 const createArticleController = new CreateArticleController()
 const updateArticleController = new UpdateArticleController()
 const deleteArticleController = new DeleteArticleController()
+const showArticleBySlugController = new ShowArticleBySlugController()
 
 router.post('/api/users', createUserController.handle)
 router.post('/api/users/login', authenticateUserController.handle)
@@ -35,5 +37,6 @@ router.get('/api/profiles/:username', ensureAuthenticated, showProfileController
 router.post('/api/articles', ensureAuthenticated, createArticleController.handle)
 router.put('/api/articles/:slug', ensureAuthenticated, updateArticleController.handle)
 router.delete('/api/articles/:slug', ensureAuthenticated, deleteArticleController.handle)
+router.get('/api/articles/:slug', showArticleBySlugController.handle)
 
 export { router }
