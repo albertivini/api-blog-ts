@@ -10,6 +10,7 @@ import { UnfollowUserController } from './useCases/UnfollowUser/UnfollowUserCont
 import { ShowProfileController } from './useCases/ShowProfile/ShowProfileController'
 import { CreateArticleController } from './useCases/CreateArticle/CreateArticleController'
 import { UpdateArticleController } from './useCases/UpdateArticle/UpdateArticleController'
+import { DeleteArticleController } from './useCases/DeleteArticle/DeleteArticleController'
 
 const router = Router()
 
@@ -22,7 +23,7 @@ const unfollowUserController = new UnfollowUserController()
 const showProfileController = new ShowProfileController()
 const createArticleController = new CreateArticleController()
 const updateArticleController = new UpdateArticleController()
-
+const deleteArticleController = new DeleteArticleController()
 
 router.post('/api/users', createUserController.handle)
 router.post('/api/users/login', authenticateUserController.handle)
@@ -33,5 +34,6 @@ router.delete('/api/profiles/:username/unfollow', ensureAuthenticated, unfollowU
 router.get('/api/profiles/:username', ensureAuthenticated, showProfileController.handle)
 router.post('/api/articles', ensureAuthenticated, createArticleController.handle)
 router.put('/api/articles/:slug', ensureAuthenticated, updateArticleController.handle)
+router.delete('/api/articles/:slug', ensureAuthenticated, deleteArticleController.handle)
 
 export { router }
