@@ -13,6 +13,7 @@ import { UpdateArticleController } from './useCases/UpdateArticle/UpdateArticleC
 import { DeleteArticleController } from './useCases/DeleteArticle/DeleteArticleController'
 import { ShowArticleBySlugController } from './useCases/ShowArticleBySlug/ShowArticleBySlugController'
 import { ShowAllArticlesController } from './useCases/ShowAllArticles/ShowAllArticlesController'
+import { ShowFeedController } from './useCases/ShowFeed/ShowFeedController'
 
 const router = Router()
 
@@ -28,6 +29,7 @@ const updateArticleController = new UpdateArticleController()
 const deleteArticleController = new DeleteArticleController()
 const showArticleBySlugController = new ShowArticleBySlugController()
 const showAllArticlesController = new ShowAllArticlesController()
+const showFeedController = new ShowFeedController()
 
 router.post('/api/users', createUserController.handle)
 router.post('/api/users/login', authenticateUserController.handle)
@@ -36,6 +38,7 @@ router.get('/api/user', ensureAuthenticated, showUserController.handle)
 router.post('/api/profiles/:username/follow', ensureAuthenticated, followUserController.handle)
 router.delete('/api/profiles/:username/unfollow', ensureAuthenticated, unfollowUserController.handle)
 router.get('/api/profiles/:username', ensureAuthenticated, showProfileController.handle)
+router.get('/api/articles/feed', ensureAuthenticated, showFeedController.handle)
 router.post('/api/articles', ensureAuthenticated, createArticleController.handle)
 router.put('/api/articles/:slug', ensureAuthenticated, updateArticleController.handle)
 router.delete('/api/articles/:slug', ensureAuthenticated, deleteArticleController.handle)
