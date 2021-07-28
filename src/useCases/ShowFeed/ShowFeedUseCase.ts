@@ -54,7 +54,7 @@ export class ShowFeedUseCase {
                 }
             })
 
-            // if ternario
+            // if ternario para testar se é true ou false
             const favorite = await searchFavorite ? true : false
             const follow = await searchFollow ? true: false
 
