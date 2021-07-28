@@ -34,11 +34,11 @@ export class ShowFeedUseCase {
     
         return Promise.all(articles.map(async article => {
 
-            // const favoritesCount = await favoriteRepositories.findAndCount({
-            //     where: {
-            //         idPost: article.id
-            //     }
-            // })
+            const favoritesCount = await favoriteRepositories.count({
+                where: {
+                    idPost: article.id
+                }
+            })
 
             const searchFollow = await followRepositories.findOne({
                 where: {
@@ -47,15 +47,15 @@ export class ShowFeedUseCase {
                 }
             })
 
-            // const searchFavorite = await favoriteRepositories.findOne({
-            //     where: {
-            //         idPost: article.id,
-            //         idUser: id
-            //     }
-            // })
+            const searchFavorite = await favoriteRepositories.findOne({
+                where: {
+                    idPost: article.id,
+                    idUser: id
+                }
+            })
 
-            // // if ternario
-            // const favorite = await searchFavorite ? true : false
+            // if ternario
+            const favorite = await searchFavorite ? true : false
             const follow = await searchFollow ? true: false
 
 
@@ -67,8 +67,8 @@ export class ShowFeedUseCase {
                 taglist: JSON.parse(article.taglist),
                 createdAt: article.created_at,
                 updatedAt: article.updated_at,
-                // favorited: favorite,
-                // favoritesCount: favoritesCount,
+                favorited: favorite,
+                favoritesCount: favoritesCount,
                 author: {
                     username: article.username,
                     bio: article.bio,

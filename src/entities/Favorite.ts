@@ -4,7 +4,7 @@ import { User } from "./User"
 import { Article } from "./Article"
 
 
-@Entity()
+@Entity("favorites")
 
 class Favorite {
 
