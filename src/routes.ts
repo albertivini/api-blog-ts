@@ -16,6 +16,7 @@ import { ShowAllArticlesController } from './useCases/ShowAllArticles/ShowAllArt
 import { ShowFeedController } from './useCases/ShowFeed/ShowFeedController'
 import { FavoriteArticleController } from './useCases/FavoriteArticle/FavoriteArticleController'
 import { UnfavoriteArticleController } from './useCases/UnfavoriteArticle/UnfavoriteArticleController'
+import { CreateCommentController } from './useCases/CreateComment/CreateCommentController'
 
 const router = Router()
 
@@ -34,6 +35,7 @@ const showAllArticlesController = new ShowAllArticlesController()
 const showFeedController = new ShowFeedController()
 const favoriteArticleController = new FavoriteArticleController()
 const unfavoriteArticleController = new UnfavoriteArticleController()
+const createCommentController = new CreateCommentController()
 
 router.post('/api/users', createUserController.handle)
 router.post('/api/users/login', authenticateUserController.handle)
@@ -50,5 +52,6 @@ router.get('/api/articles/:slug', showArticleBySlugController.handle)
 router.get('/api/articles', showAllArticlesController.handle)
 router.post('/api/articles/:slug/favorite', ensureAuthenticated, favoriteArticleController.handle)
 router.delete('/api/articles/:slug/favorite', ensureAuthenticated, unfavoriteArticleController.handle)
+router.post('/api/articles/:slug/comments', ensureAuthenticated, createCommentController.handle)
 
 export { router }
